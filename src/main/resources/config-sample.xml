@@ -12,8 +12,8 @@
     <databases>
         <database name="sqlmart-dev">
             <driver>jtds</driver>
-            <url>jdbc:jtds:sqlserver://dataapi-db-dev.morningstar.com:1433/mart</url>
-            <user>DF-MartDBRW-NonPROD</user>
+            <url></url>
+            <user></user>
             <password></password>
         </database>
         <database name="mysql-local">
