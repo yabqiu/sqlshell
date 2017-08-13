@@ -1,0 +1,26 @@
+<config>
+    <settings>
+        <ansicolor>true</ansicolor>
+    </settings>
+    <drivers>
+        <driver name="mssql_jdbc">com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+        <driver name="jtds">net.sourceforge.jtds.jdbc.Driver</driver>
+        <driver name="hsqldb_server">org.hsqldb.jdbcDriver</driver>
+        <driver name="hsqldb_embedded">org.hsqldb.jdbc.JDBCDriver</driver>
+        <driver name="mysql">com.mysql.jdbc.Driver</driver>
+    </drivers>
+    <databases>
+        <database name="sqlmart-dev">
+            <driver>jtds</driver>
+            <url>jdbc:jtds:sqlserver://dataapi-db-dev.morningstar.com:1433/mart</url>
+            <user>DF-MartDBRW-NonPROD</user>
+            <password></password>
+        </database>
+        <database name="mysql-local">
+            <driver>mysql</driver>
+            <url>jdbc:mysql://localhost:3306/test?useSSL=false</url>
+            <user>root</user>
+            <password></password>
+        </database>
+    </databases>
+</config>

@@ -1,0 +1,40 @@
+buildscript {
+    ext.kotlin_version = '1.1.2'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+
+    compile "org.jetbrains.kotlin:kotlin-reflect"
+    testCompile "org.jetbrains.kotlin:kotlin-test"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+
+    compile files('libs/btc-ascii-table-1.0.jar')
+
+    compile "jline:jline:2.6"
+//    compile "org.jline:jline:3.3.0"
+//    compile "org.jline:jline-terminal:3.3.0"
+//    compile "org.jline:jline-reader:3.3.0"
+//    compile "net.java.dev.jna:jna:4.4.0"
+//    compile "org.fusesource.jansi:jansi:1.16"
+    compile "commons-cli:commons-cli:1.4"
+    compile "org.dom4j:dom4j:2.0.0"
+}
+
+apply plugin: 'application'
+//mainClassName = 'cc.unmi.sqlshell.Main'
+mainClassName = 'cc.unmi.sqlshell.SqlShell'
