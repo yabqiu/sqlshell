@@ -146,7 +146,7 @@
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                     <arguments>
-                        <argument>argument1</argument>
+                        <argument>mysql-local</argument>
                     </arguments>
                     <systemProperties>
                         <systemProperty>

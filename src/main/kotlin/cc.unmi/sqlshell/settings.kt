@@ -4,7 +4,6 @@ import org.dom4j.io.SAXReader
 import java.io.File
 import kotlin.system.exitProcess
 
-
 data class Driver(val name: String, val driverClass: String)
 data class Database(val name: String, val driver: String, val url: String, val user: String, val password: String)
 

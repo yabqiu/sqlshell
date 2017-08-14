@@ -10,6 +10,17 @@ import java.util.*
 import java.util.logging.Logger
 import kotlin.streams.toList
 
+fun registerDriver(driverClass: String) {
+
+    val userDir = System.getProperty("user.dir") + "/drivers"
+    val urls= Files.list(Paths.get(userDir)).map { t -> t.toUri().toURL()!! }.toList().toTypedArray()
+
+    @Suppress("UNCHECKED_CAST")
+    val clazz = URLClassLoader(urls).loadClass(driverClass) as Class<Driver>?
+
+    DriverManager.registerDriver(DriverShim(clazz!!.newInstance()))
+}
+
 internal class DriverShim(private val driver: Driver) : Driver {
     override fun getParentLogger(): Logger {
         TODO("not implemented")
@@ -43,14 +54,4 @@ internal class DriverShim(private val driver: Driver) : Driver {
     }
 }
 
-fun registerDriver(driverClass: String) {
-
-    val userDir = System.getProperty("user.dir") + "/drivers"
-    val urls= Files.list(Paths.get(userDir)).map { t -> t.toUri().toURL()!! }.toList().toTypedArray()
-
-    @Suppress("UNCHECKED_CAST")
-    val clazz = URLClassLoader(urls).loadClass(driverClass) as Class<Driver>?
-
-    DriverManager.registerDriver(DriverShim(clazz!!.newInstance()))
-}
 
