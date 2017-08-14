@@ -1,13 +1,13 @@
 package cc.unmi.sqlshell
 
-import org.dom4j.Node
+import org.jaxen.dom.DOMXPath
+import org.w3c.dom.Node
 
-object XPath {
-    fun selectText(xpath: String, node: Node): String {
-       return node.selectSingleNode(xpath).text
-    }
 
-    fun selectNodes(xpath: String, node: Node): List<Node> {
-        return node.selectNodes(xpath)
-    }
+fun Node.selectText(xpath: String): String {
+    return (DOMXPath(xpath).selectSingleNode(this) as Node).textContent
+}
+
+fun Node.selectNodes(xpath: String): List<Node> {
+    return DOMXPath(xpath).selectNodes(this).map { any -> any as Node }.toList()
 }

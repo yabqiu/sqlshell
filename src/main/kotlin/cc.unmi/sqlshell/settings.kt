@@ -1,7 +1,7 @@
 package cc.unmi.sqlshell
 
-import org.dom4j.io.SAXReader
 import java.io.File
+import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.system.exitProcess
 
 data class Driver(val name: String, val driverClass: String)
@@ -23,18 +23,18 @@ fun loadConfig(): Settings {
         exitProcess(1)
     }
 
-    val dom = SAXReader().read(configFile)
+    val dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(configFile)
 
-    val drivers = XPath.selectNodes("//drivers/driver", dom).map { node ->
-        Driver(XPath.selectText("@name", node), node.text)
+    val drivers = dom.selectNodes("//drivers/driver").map { node ->
+        Driver(node.selectText("@name"), node.textContent)
     }.toList()
 
-    val databases = XPath.selectNodes("//databases/database", dom).map { node ->
-        Database(XPath.selectText("@name", node),
-                XPath.selectText("driver", node),
-                XPath.selectText("url", node),
-                XPath.selectText("user", node),
-                XPath.selectText("password", node))
+    val databases = dom.selectNodes("//databases/database").map { node ->
+        Database(node.selectText("@name"),
+                node.selectText("driver"),
+                node.selectText("url"),
+                node.selectText("user"),
+                node.selectText("password"))
     }.toList()
 
     return Settings(drivers, databases)
